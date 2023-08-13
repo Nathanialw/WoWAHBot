@@ -26,7 +26,7 @@
                     <Grid>
                         <!--  Start button  -->
                         <Button
-                            x:Name="start"
+                            x:Name="clickerStart"
                             Width="99"
                             Height="29"
                             Margin="10,14,0,0"
@@ -39,7 +39,7 @@
                             IsEnabled="True" />
                         <!--  Stop button  -->
                         <Button
-                            x:Name="stop"
+                            x:Name="clickerStop"
                             Width="99"
                             Height="30"
                             Margin="10,48,0,0"
@@ -161,12 +161,22 @@
             VerticalAlignment="Top"
             Background="CornflowerBlue">
             <Button
-                x:Name="bottom_button"
+                x:Name="posterStart"
                 Width="75"
                 Margin="24,25,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="test" />
+                Click="Posting_Start"
+                Content="Start" />
+            <Button
+                x:Name="posterStop"
+                Width="75"
+                Margin="24,50,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Posting_Stop"
+                Content="Stop" 
+                IsEnabled="False" />
         </Grid>
     </Grid>
 
