@@ -11,21 +11,21 @@
     Background="Gray"
     ResizeMode="NoResize"
     mc:Ignorable="d">
-    <Grid x:Name="Whole_thing_I_guess">
-        <!--  Top clicker portion  -->
-        <Grid
+	<Grid x:Name="Whole_thing_I_guess">
+		<!--  Top clicker portion  -->
+		<Grid
             x:Name="Top_Clicker"
             Height="120"
             VerticalAlignment="Top">
-            <TabControl
+			<TabControl
                 Width="394"
                 Height="150"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top">
-                <TabItem Header="Clicker Controls">
-                    <Grid>
-                        <!--  Start button  -->
-                        <Button
+				<TabItem Header="Clicker Controls">
+					<Grid>
+						<!--  Start button  -->
+						<Button
                             x:Name="clickerStart"
                             Width="99"
                             Height="29"
@@ -37,8 +37,8 @@
                             Content="start"
                             FontSize="20"
                             IsEnabled="True" />
-                        <!--  Stop button  -->
-                        <Button
+						<!--  Stop button  -->
+						<Button
                             x:Name="clickerStop"
                             Width="99"
                             Height="30"
@@ -50,12 +50,12 @@
                             Content="stop"
                             FontSize="20"
                             IsEnabled="False" />
-                        <!--  Clicks/ms setter  -->
-                        <Label
+						<!--  Clicks/ms setter  -->
+						<Label
                             Margin="180,20,40,79"
                             Padding="0"
                             Content="Time between clicks (ms)" />
-                        <Slider
+						<Slider
                             x:Name="Speed"
                             Width="248"
                             Height="29"
@@ -69,24 +69,24 @@
                             Minimum="1"
                             ValueChanged="Delay_Slider"
                             Value="200" />
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Options">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="47*" />
-                            <ColumnDefinition Width="208*" />
-                            <ColumnDefinition Width="133*" />
-                        </Grid.ColumnDefinitions>
-                        <!--  window title setter  -->
-                        <Label
+					</Grid>
+				</TabItem>
+				<TabItem Header="Options">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="47*" />
+							<ColumnDefinition Width="208*" />
+							<ColumnDefinition Width="133*" />
+						</Grid.ColumnDefinitions>
+						<!--  window title setter  -->
+						<Label
                             x:Name="Window_input_label"
                             Grid.ColumnSpan="2"
                             Margin="10,1,125,102"
                             Padding="0"
                             Content="Target window name"
                             FontSize="10" />
-                        <TextBox
+						<TextBox
                             x:Name="Window_Title"
                             Grid.ColumnSpan="2"
                             Width="120"
@@ -96,7 +96,7 @@
                             VerticalAlignment="Top"
                             Text="World of Warcraft"
                             TextWrapping="Wrap" />
-                        <Button
+						<Button
                             Grid.Column="1"
                             Width="23"
                             Height="23"
@@ -105,14 +105,14 @@
                             VerticalAlignment="Top"
                             Click="Button_Click_1"
                             Content="Ok" />
-                        <!--  Key to spam setter  -->
-                        <Label
+						<!--  Key to spam setter  -->
+						<Label
                             Grid.ColumnSpan="2"
                             Margin="10,42,125,61"
                             Padding="0"
                             Content="Key to spam"
                             FontSize="10" />
-                        <TextBox
+						<TextBox
                             x:Name="Spam_Key"
                             Grid.ColumnSpan="2"
                             Width="120"
@@ -120,7 +120,7 @@
                             Margin="10,61,125,38"
                             Text="+{F12}"
                             TextWrapping="Wrap" />
-                        <Button
+						<Button
                             Grid.Column="1"
                             Width="23"
                             Height="23"
@@ -129,15 +129,15 @@
                             VerticalAlignment="Top"
                             Click="Button_Click"
                             Content="Ok" />
-                        <!--  variance in random time calcualted between clicks setter  -->
-                        <Label
+						<!--  variance in random time calcualted between clicks setter  -->
+						<Label
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             Margin="146,1,39,102"
                             Padding="0"
                             Content="Variance between keypresses (ms)"
                             FontSize="10" />
-                        <Slider
+						<Slider
                             x:Name="variance"
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
@@ -148,19 +148,19 @@
                             RenderTransformOrigin="0.3,1.591"
                             ValueChanged="variance_ValueChanged"
                             Value="50" />
-                        <!--  # of clicks setter  -->
-                    </Grid>
-                </TabItem>
-            </TabControl>
-        </Grid>
-        <!--  AH Bot Portion  -->
-        <Grid
+						<!--  # of clicks setter  -->
+					</Grid>
+				</TabItem>
+			</TabControl>
+		</Grid>
+		<!--  AH Bot Portion  -->
+		<Grid
             x:Name="bot_Portion"
             Height="225"
             Margin="0,125,0,0"
             VerticalAlignment="Top"
             Background="CornflowerBlue">
-            <Button
+			<Button
                 x:Name="posterStart"
                 Width="75"
                 Margin="24,25,0,0"
@@ -168,7 +168,7 @@
                 VerticalAlignment="Top"
                 Click="Posting_Start"
                 Content="Start" />
-            <Button
+			<Button
                 x:Name="posterStop"
                 Width="75"
                 Margin="24,50,0,0"
@@ -177,7 +177,72 @@
                 Click="Posting_Stop"
                 Content="Stop" 
                 IsEnabled="False" />
-        </Grid>
-    </Grid>
-
+			<Label
+	           Margin="193,51,87,155"
+	           Padding="0"
+	           Content="Clicker Duration"
+	           FontSize="10" />
+			<Label
+	           Margin="193,10,87,196"
+	           Padding="0"
+	           Content="Search Duration"
+	           FontSize="10" />
+			<TextBox
+			x:Name="Search_Duration_text"
+			Width="120"
+			Height="23"
+			Margin="191,25,89,177"
+			Text="120"
+			TextWrapping="Wrap" 
+			TextChanged="Search_Duration" />
+			<TextBox
+	          x:Name="Clicker_Duration_text"
+	          Width="120"
+	          Height="23"
+	          Margin="193,65,87,137"
+	          Text="180"
+	          TextWrapping="Wrap" 
+			  TextChanged="Clicker_Duration" />
+			<TextBox
+	          x:Name="Wait_For_Login_text"
+	          Width="120"
+	          Height="23"
+	          Margin="193,106,87,96"
+	          Text="600"
+	          TextWrapping="Wrap" 
+			  TextChanged="Wait_For_Login" />
+			<TextBox
+	          x:Name="Time_Between_Events_text"
+	          Width="120"
+	          Height="23"
+	          Margin="193,143,87,59"
+	          Text="4"
+	          TextWrapping="Wrap" 
+			  TextChanged="Time_Between_Events" RenderTransformOrigin="0.496,-5.237" />
+			<TextBox
+	          x:Name="Number_Of_Characters_text"
+	          Width="120"
+	          Height="23"
+	          Margin="193,182,87,20"
+	          Text="3"
+	          TextWrapping="Wrap" 
+			  TextChanged="Number_Of_Characters" />
+			<Label
+	          Margin="193,92,87,119"
+	          Padding="0"
+	          Content="Wait for logon"
+	          FontSize="10" />
+			<Label
+	          Margin="193,129,87,80"
+	          Padding="0"
+	          Content="Time Between Events"
+	          FontSize="10" />
+			<Label
+		      Margin="193,165,87,48"
+		      Padding="0"
+		      Content="Number of Characters"
+		      FontSize="10" RenderTransformOrigin="0.5,0.5" >			
+			</Label>
+		</Grid>
+	</Grid>
 </Window>

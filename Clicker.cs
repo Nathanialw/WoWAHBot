@@ -22,6 +22,13 @@ namespace ClickControl
         public static bool clickerState = false;
         public static bool posterState = false;
 
+        public static int Search_Duration = 120;
+        public static int Clicker_Duration = 180;
+        public static int Logon_Wait = 600;
+
+        public static int Time_Between_Events = 4;
+        public static int Number_Characters = 3;
+
         //methods
         public static async void RunClickerAsync()
         {
@@ -43,50 +50,65 @@ namespace ClickControl
 
         public static async void RunAuctionPostAsync()
         {
+            int numChars = 1;
             posterState = true;
             while (posterState)
-            {               
+            {
                 // tar auctioneer
                 _ = AutoItX.ControlSend(windowTitle, "", "", "1");
-                await Task.Delay(2000 + DelayCalc());
+                await Task.Delay(Time_Between_Events + DelayCalc());
+                if (!posterState) break;
+
                 // open aucitoneer panel
                 _ = AutoItX.ControlSend(windowTitle, "", "", "0");
-                await Task.Delay(2000 + DelayCalc());
+                await Task.Delay(Time_Between_Events + DelayCalc());
+                if (!posterState) break;
+
                 // run post scan
                 _ = AutoItX.ControlSend(windowTitle, "", "", "2");                                
-                await Task.Delay(120000 + DelayCalc());
-                
-                if (!posterState)
-                {
-                    break;
-                }
-                
+                await Task.Delay(Search_Duration + DelayCalc());
+                if (!posterState) break;
+
                 // post                
                 RunClickerAsync();
-                await Task.Delay(180000 + DelayCalc());
+                await Task.Delay(Clicker_Duration + DelayCalc());
                 clickerState = false;
-                await Task.Delay(10000 + DelayCalc());
-                
-                if (!posterState)
-                {
-                    break;
-                }
+                if (!posterState) break;
+
+                // short delay before logging off
+                await Task.Delay(Time_Between_Events + DelayCalc());                
+                if (!posterState) break;                
                 
                 // logout
                 _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-                await Task.Delay(10000 + DelayCalc());
-                // next character
-                _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                await Task.Delay(600000 + DelayCalc());
+                await Task.Delay(Logon_Wait+ DelayCalc());
+                if (!posterState) break;
 
-                if (!posterState)
+                // check if last character
+                if (numChars < Number_Characters)
                 {
-                    break;
+                    // next character
+                    _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
+                    await Task.Delay(Time_Between_Events + DelayCalc());
+                    if (!posterState) break;
+                    numChars++;
                 }
+                else { 
+
+                    // reset char list loop
+                    for (int i = 1; i < (Number_Characters); i++)
+                    {
+                        _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
+                        await Task.Delay(Logon_Wait + DelayCalc());
+                        if (!posterState) break;
+                    }
+                    numChars = 1;
+                }                
 
                 // login
-                _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
-                await Task.Delay(20000 + DelayCalc());
+                //_ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
+                await Task.Delay(Time_Between_Events + DelayCalc());
+                if (!posterState) break;
             }
         }
 

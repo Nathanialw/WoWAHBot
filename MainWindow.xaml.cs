@@ -74,6 +74,31 @@ namespace test
             Clicker.clickerState = false;
         }
 
+        private void Search_Duration(object sender, TextChangedEventArgs e)
+        {
+            Clicker.Search_Duration = Convert.ToInt32(Search_Duration_text.Text) * 1000;
+        }
+
+        private void Clicker_Duration(object sender, TextChangedEventArgs e)
+        {
+            Clicker.Clicker_Duration = Convert.ToInt32(Clicker_Duration_text.Text) * 1000;
+        }
+
+        private void Wait_For_Login(object sender, TextChangedEventArgs e)
+        {
+            Clicker.Logon_Wait = Convert.ToInt32(Wait_For_Login_text.Text) * 1000;
+        }
+
+        private void Time_Between_Events(object sender, TextChangedEventArgs e)
+        {
+            Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
+        }
+
+        private void Number_Of_Characters(object sender, TextChangedEventArgs e)
+        {
+            Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
+        }
+
     }
 }
 
