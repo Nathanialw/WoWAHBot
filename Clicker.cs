@@ -49,6 +49,9 @@ namespace ClickControl
                 // tar auctioneer
                 _ = AutoItX.ControlSend(windowTitle, "", "", "1");
                 await Task.Delay(2000 + DelayCalc());
+                // open aucitoneer panel
+                _ = AutoItX.ControlSend(windowTitle, "", "", "0");
+                await Task.Delay(2000 + DelayCalc());
                 // run post scan
                 _ = AutoItX.ControlSend(windowTitle, "", "", "2");                                
                 await Task.Delay(2000 + DelayCalc());
