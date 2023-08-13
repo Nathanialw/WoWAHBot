@@ -106,7 +106,7 @@ namespace ClickControl
                 }                
 
                 // login
-                //_ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
+                _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
                 await Task.Delay(Time_Between_Events + DelayCalc());
                 if (!posterState) break;
             }
