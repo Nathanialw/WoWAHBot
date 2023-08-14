@@ -54,18 +54,36 @@ namespace ClickControl
                 await Task.Delay(2000 + DelayCalc());
                 // run post scan
                 _ = AutoItX.ControlSend(windowTitle, "", "", "2");                                
-                await Task.Delay(60000 + DelayCalc());
-                // post
-                RunClickerAsync();
                 await Task.Delay(120000 + DelayCalc());
+                
+                if (!posterState)
+                {
+                    break;
+                }
+                
+                // post                
+                RunClickerAsync();
+                await Task.Delay(180000 + DelayCalc());
                 clickerState = false;
-
+                await Task.Delay(10000 + DelayCalc());
+                
+                if (!posterState)
+                {
+                    break;
+                }
+                
                 // logout
                 _ = AutoItX.ControlSend(windowTitle, "", "", "3");
                 await Task.Delay(10000 + DelayCalc());
                 // next character
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
                 await Task.Delay(600000 + DelayCalc());
+
+                if (!posterState)
+                {
+                    break;
+                }
+
                 // login
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
                 await Task.Delay(20000 + DelayCalc());
