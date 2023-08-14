@@ -26,7 +26,7 @@ namespace ClickControl
         public static int Clicker_Duration = 180;
         public static int Logon_Wait = 600;
 
-        public static int Time_Between_Events = 4;
+        public static int Time_Between_Events = 15;
         public static int Number_Characters = 3;
 
         //methods
@@ -81,7 +81,7 @@ namespace ClickControl
                 
                 // logout
                 _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-                await Task.Delay(Logon_Wait+ DelayCalc());
+                await Task.Delay(Logon_Wait + DelayCalc());
                 if (!posterState) break;
 
                 // check if last character
@@ -99,7 +99,7 @@ namespace ClickControl
                     for (int i = 1; i < (Number_Characters); i++)
                     {
                         _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
-                        await Task.Delay(Logon_Wait + DelayCalc());
+                        await Task.Delay(Time_Between_Events + DelayCalc());
                         if (!posterState) break;
                     }
                     numChars = 1;

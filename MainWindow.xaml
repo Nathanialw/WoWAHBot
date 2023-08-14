@@ -219,7 +219,7 @@
 	          Width="120"
 	          Height="23"
 	          Margin="193,143,87,59"
-	          Text="4"
+	          Text="15"
 	          TextWrapping="Wrap" 
 			  TextChanged="Time_Between_Events" RenderTransformOrigin="0.496,-5.237" />
 			<TextBox
