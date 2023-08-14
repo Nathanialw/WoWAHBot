@@ -54,7 +54,7 @@ namespace ClickControl
                 await Task.Delay(2000 + DelayCalc());
                 // run post scan
                 _ = AutoItX.ControlSend(windowTitle, "", "", "2");                                
-                await Task.Delay(2000 + DelayCalc());
+                await Task.Delay(60000 + DelayCalc());
                 // post
                 RunClickerAsync();
                 await Task.Delay(120000 + DelayCalc());
@@ -65,7 +65,7 @@ namespace ClickControl
                 await Task.Delay(10000 + DelayCalc());
                 // next character
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                await Task.Delay(900000 + DelayCalc());
+                await Task.Delay(600000 + DelayCalc());
                 // login
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
                 await Task.Delay(20000 + DelayCalc());
