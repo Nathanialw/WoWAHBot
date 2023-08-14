@@ -54,6 +54,9 @@ namespace ClickControl
             posterState = true;
             while (posterState)
             {
+                // wait a moment for the game to load
+                await Task.Delay(30000 + DelayCalc());
+
                 // tar auctioneer
                 _ = AutoItX.ControlSend(windowTitle, "", "", "1");
                 await Task.Delay(Time_Between_Events + DelayCalc());
