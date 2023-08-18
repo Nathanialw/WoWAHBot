@@ -99,7 +99,6 @@ namespace ClickControl
                         numChars++;
                     }
                     else { 
-
                         // reset char list loop
                         for (int i = 1; i < (Number_Characters); i++)
                         {
