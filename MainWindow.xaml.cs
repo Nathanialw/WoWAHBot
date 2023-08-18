@@ -25,7 +25,14 @@ namespace test
     {
         public MainWindow()
         {
+
             InitializeComponent();
+            Clicker.Set_Settings();
+            Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration);
+            Clicker_Duration_text.Text = Convert.ToString(Clicker.Clicker_Duration);
+            Wait_For_Login_text.Text = Convert.ToString(Clicker.Logon_Wait);
+            Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events);
+            Number_Of_Characters_text.Text = Convert.ToString(Clicker.Number_Characters);
         }
 
         //Top clicker portion
