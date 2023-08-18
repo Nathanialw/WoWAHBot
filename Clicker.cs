@@ -117,6 +117,7 @@ namespace ClickControl
                 else
                 {
                     // wait for next loop
+                    _ = AutoItX.ControlSend(windowTitle, "", "", "{esc}");
                     await Task.Delay(Logon_Wait + DelayCalc());
                     if (!posterState) break;
                 }
