@@ -80,38 +80,47 @@ namespace ClickControl
 
                 // short delay before logging off
                 await Task.Delay(Time_Between_Events + DelayCalc());                
-                if (!posterState) break;                
-                
-                // logout
-                _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-                await Task.Delay(Logon_Wait + DelayCalc());
                 if (!posterState) break;
 
-                // check if last character
-                if (numChars < Number_Characters)
+                if (Number_Characters > 1)
                 {
-                    // next character
-                    _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                    await Task.Delay(Time_Between_Events + DelayCalc());
+                    // logout
+                    _ = AutoItX.ControlSend(windowTitle, "", "", "3");
+                    await Task.Delay(Logon_Wait + DelayCalc());
                     if (!posterState) break;
-                    numChars++;
-                }
-                else { 
 
-                    // reset char list loop
-                    for (int i = 1; i < (Number_Characters); i++)
+                    // check if last character
+                    if (numChars < Number_Characters)
                     {
-                        _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
+                        // next character
+                        _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
                         await Task.Delay(Time_Between_Events + DelayCalc());
                         if (!posterState) break;
+                        numChars++;
                     }
-                    numChars = 1;
-                }                
+                    else { 
 
-                // login
-                _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
-                await Task.Delay(Time_Between_Events + DelayCalc());
-                if (!posterState) break;
+                        // reset char list loop
+                        for (int i = 1; i < (Number_Characters); i++)
+                        {
+                            _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
+                            await Task.Delay(Time_Between_Events + DelayCalc());
+                            if (!posterState) break;
+                        }
+                        numChars = 1;
+                    }
+
+                     // login
+                    _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
+                    await Task.Delay(Time_Between_Events + DelayCalc());
+                    if (!posterState) break;
+                }
+                else
+                {
+                    // wait for next loop
+                    await Task.Delay(Logon_Wait + DelayCalc());
+                    if (!posterState) break;
+                }
             }
         }
 
