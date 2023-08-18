@@ -24,11 +24,11 @@ namespace ClickControl
         public static bool clickerState = false;
         public static bool posterState = false;
 
-        public static int Search_Duration = 1;
-        public static int Clicker_Duration = 1;
-        public static int Logon_Wait = 1;
+        public static int Search_Duration = 120;
+        public static int Clicker_Duration = 120;
+        public static int Logon_Wait = 30;
 
-        public static int Time_Between_Events = 1;
+        public static int Time_Between_Events = 5;
         public static int Number_Characters = 1;
 
         //methods
@@ -127,16 +127,26 @@ namespace ClickControl
         }
         public static void Set_Settings()
         {
-            var path = "settings.txt";
-            string[] lines = File.ReadAllLines(path);
+            var path = "./settings.txt";
             
-            if (lines.Length > 0) { 
-                Search_Duration = Convert.ToInt32(lines[0]);
-                Clicker_Duration = Convert.ToInt32(lines[1]);
-                Logon_Wait = Convert.ToInt32(lines[2]);
-                Time_Between_Events = Convert.ToInt32(lines[3]);
-                Number_Characters = Convert.ToInt32(lines[4]);
+            try
+            {
+                string[] lines = File.ReadAllLines(path);
+
+                if (lines.Length > 0)
+                {
+                    Search_Duration = Convert.ToInt32(lines[0]);
+                    Clicker_Duration = Convert.ToInt32(lines[1]);
+                    Logon_Wait = Convert.ToInt32(lines[2]);
+                    Time_Between_Events = Convert.ToInt32(lines[3]);
+                    Number_Characters = Convert.ToInt32(lines[4]);
+                }
             }
+            catch
+            {
+
+            }
+
         }
     }
 }
