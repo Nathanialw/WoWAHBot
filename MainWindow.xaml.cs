@@ -59,7 +59,6 @@ namespace test
         }
 
         //Bottom bot portion
-
         private void Posting_Start(object sender, RoutedEventArgs e)
         {
             posterStart.IsEnabled = false;
@@ -96,6 +95,15 @@ namespace test
 
         private void Number_Of_Characters(object sender, RoutedEventArgs e)
         {
+            Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
+        }
+
+        private void Set_All(object sender, RoutedEventArgs e)
+        {
+            Clicker.Search_Duration = Convert.ToInt32(Search_Duration_text.Text) * 1000;
+            Clicker.Clicker_Duration = Convert.ToInt32(Clicker_Duration_text.Text) * 1000;
+            Clicker.Logon_Wait = Convert.ToInt32(Wait_For_Login_text.Text) * 1000;
+            Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
         }
     }

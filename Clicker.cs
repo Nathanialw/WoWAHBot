@@ -23,11 +23,11 @@ namespace ClickControl
         public static bool posterState = false;
 
         public static int Search_Duration = 120;
-        public static int Clicker_Duration = 180;
-        public static int Logon_Wait = 600;
+        public static int Clicker_Duration = 120;
+        public static int Logon_Wait = 30;
 
-        public static int Time_Between_Events = 15;
-        public static int Number_Characters = 3;
+        public static int Time_Between_Events = 5;
+        public static int Number_Characters = 1;
 
         //methods
         public static async void RunClickerAsync()

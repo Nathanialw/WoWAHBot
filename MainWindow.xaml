@@ -202,21 +202,21 @@
 	          Width="120"
 	          Height="23"
 	          Margin="193,65,87,137"
-	          Text="180"
+	          Text="120"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Wait_For_Login_text"
 	          Width="120"
 	          Height="23"
 	          Margin="193,106,87,96"
-	          Text="600"
+	          Text="30"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Time_Between_Events_text"
 	          Width="120"
 	          Height="23"
 	          Margin="193,143,87,59"
-	          Text="15"
+	          Text="5"
 	          TextWrapping="Wrap" 
               RenderTransformOrigin="0.496,-5.237" />
             <TextBox
@@ -224,7 +224,7 @@
 	          Width="120"
 	          Height="23"
 	          Margin="193,182,87,20"
-	          Text="3"
+	          Text="1"
 	          TextWrapping="Wrap" />
             <Label
 	          Margin="193,92,87,119"
@@ -282,6 +282,16 @@
                 VerticalAlignment="Top"
                 Click="Number_Of_Characters"
                 Content="Ok" RenderTransformOrigin="8.177,2.269" />
+            <Button
+                Width="65"
+                Height="15"
+                Margin="318,208,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Set_All"
+                Content="Set All" 
+                FontSize="8"
+                RenderTransformOrigin="8.177,2.269" />
         </Grid>
     </Grid>
 </Window>
