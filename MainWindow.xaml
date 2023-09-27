@@ -6,25 +6,32 @@
     xmlns:local="clr-namespace:test"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Clicker"
-    Width="400"
-    Height="400"
+    Width="399"
+    Height="491"
     Background="Gray"    
     mc:Ignorable="d">
     <Grid x:Name="Whole_thing_I_guess">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="33*"/>
-            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="41*"/>
+            <ColumnDefinition Width="34*"/>
         </Grid.ColumnDefinitions>
         <!--  Top clicker portion  -->
         <Grid
             x:Name="Top_Clicker"
             Height="120"
-            VerticalAlignment="Top" Grid.ColumnSpan="2">
+            VerticalAlignment="Top" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="249*"/>
+                <ColumnDefinition Width="86*"/>
+                <ColumnDefinition Width="46*"/>
+                <ColumnDefinition Width="18*"/>
+            </Grid.ColumnDefinitions>
             <TabControl
                 Width="394"
                 Height="150"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+                VerticalAlignment="Top" Grid.ColumnSpan="4">
                 <TabItem Header="Clicker Controls">
                     <Grid>
                         <!--  Start button  -->
@@ -159,10 +166,10 @@
         <!--  AH Bot Portion  -->
         <Grid
             x:Name="bot_Portion"
-            Height="225"
+            Height="330"
             Margin="0,125,0,0"
             VerticalAlignment="Top"
-            Background="CornflowerBlue" Grid.ColumnSpan="2">
+            Background="CornflowerBlue" Grid.ColumnSpan="3">
             <Button
                 x:Name="posterStart"
                 Width="75"
@@ -181,12 +188,12 @@
                 Content="Stop" 
                 IsEnabled="False" />
             <Label
-	           Margin="193,51,87,155"
+	           Margin="193,51,87,261"
 	           Padding="0"
 	           Content="Clicker Duration"
 	           FontSize="10" />
             <Label
-	           Margin="193,10,87,196"
+	           Margin="193,10,87,309"
 	           Padding="0"
 	           Content="Search Duration"
 	           FontSize="10" />
@@ -194,49 +201,60 @@
 			    x:Name="Search_Duration_text"
 			    Width="120"
 			    Height="23"
-			    Margin="191,25,89,177"
+			    Margin="191,26,88,281"
 			    TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Clicker_Duration_text"
 	          Width="120"
 	          Height="23"
-	          Margin="193,65,87,137"
+	          Margin="191,69,88,238"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Wait_For_Login_text"
 	          Width="120"
 	          Height="23"
-	          Margin="193,106,87,96"
+	          Margin="190,106,89,201"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Time_Between_Events_text"
 	          Width="120"
 	          Height="23"
-	          Margin="193,143,87,59"
+	          Margin="190,145,89,162"
 	          TextWrapping="Wrap" 
               RenderTransformOrigin="0.496,-5.237" />
             <TextBox
 	          x:Name="Number_Of_Characters_text"
 	          Width="120"
 	          Height="23"
-	          Margin="193,182,87,20"
-	          TextWrapping="Wrap" />
+	          Margin="190,182,89,125"
+	          TextWrapping="Wrap"/>
+            <TextBox
+                x:Name="Number_Of_Reposts_text"
+                Width="120"
+                Height="23"
+                Margin="190,221,89,86"
+                TextWrapping="Wrap" />
             <Label
-	          Margin="193,92,87,119"
+	          Margin="191,92,89,224"
 	          Padding="0"
 	          Content="Wait for logon"
 	          FontSize="10" />
             <Label
-	          Margin="193,129,87,80"
+	          Margin="193,129,87,190"
 	          Padding="0"
 	          Content="Time Between Events"
 	          FontSize="10" />
             <Label
-		      Margin="193,165,87,48"
+		      Margin="191,167,89,146"
 		      Padding="0"
 		      Content="Number of Characters"
 		      FontSize="10" RenderTransformOrigin="0.5,0.5" >
             </Label>
+            <Label
+                Margin="193,205,87,108"
+                Padding="0"
+                Content="Number of Reposts"
+                FontSize="10" RenderTransformOrigin="0.5,0.5" />
             <Button
                Width="23"
                Height="23"
@@ -278,15 +296,24 @@
                 Click="Number_Of_Characters"
                 Content="Ok" RenderTransformOrigin="8.177,2.269" />
             <Button
+                Width="23"
+                Height="23"
+                Margin="319,221,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Number_Of_Reposts"
+                Content="Ok" RenderTransformOrigin="8.177,2.269" />
+            <Button
                 Width="65"
                 Height="15"
-                Margin="318,208,0,0"
+                Margin="319,249,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="Set_All"
                 Content="Set All" 
                 FontSize="8"
                 RenderTransformOrigin="8.177,2.269" />
+
         </Grid>
     </Grid>
 </Window>

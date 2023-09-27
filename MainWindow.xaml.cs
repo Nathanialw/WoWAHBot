@@ -28,11 +28,12 @@ namespace test
 
             InitializeComponent();
             Clicker.Set_Settings();
-            Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration);
-            Clicker_Duration_text.Text = Convert.ToString(Clicker.Clicker_Duration);
-            Wait_For_Login_text.Text = Convert.ToString(Clicker.Logon_Wait);
-            Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events);
+            Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration / 1000);
+            Clicker_Duration_text.Text = Convert.ToString(Clicker.Clicker_Duration / 1000);
+            Wait_For_Login_text.Text = Convert.ToString(Clicker.Logon_Wait / 1000);
+            Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events / 1000);
             Number_Of_Characters_text.Text = Convert.ToString(Clicker.Number_Characters);
+            Number_Of_Reposts_text.Text = Convert.ToString(Clicker.Number_Reposts);
         }
 
         //Top clicker portion
@@ -105,6 +106,11 @@ namespace test
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
         }
 
+        private void Number_Of_Reposts(object sender, RoutedEventArgs e)
+        {
+            Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
+        }
+
         private void Set_All(object sender, RoutedEventArgs e)
         {
             Clicker.Search_Duration = Convert.ToInt32(Search_Duration_text.Text) * 1000;
@@ -112,6 +118,7 @@ namespace test
             Clicker.Logon_Wait = Convert.ToInt32(Wait_For_Login_text.Text) * 1000;
             Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
+            Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
         }
     }
 }
