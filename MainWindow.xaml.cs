@@ -119,6 +119,20 @@ namespace test
             Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
             Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
+
+            //write it to text file to save settings
+        }
+
+        private void Set_Continuous_Loop(object sender, RoutedEventArgs e)
+        {
+            Clicker.continuousLoop = true;
+            
+        }
+
+        private void Unset_Continuous_Loop(object sender, RoutedEventArgs e)
+        {
+            Clicker.continuousLoop = false;
+            
         }
     }
 }

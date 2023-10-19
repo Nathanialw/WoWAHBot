@@ -23,6 +23,7 @@ namespace ClickControl
         public static int Slider_Pos;
         public static bool clickerState = false;
         public static bool posterState = false;
+        public static bool continuousLoop = false;
 
         public static int Search_Duration;
         public static int Clicker_Duration;
@@ -37,8 +38,13 @@ namespace ClickControl
             clickerState = true;
             while (clickerState)
             {
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
+
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
-                await Task.Delay(DelayCalc());
+                await Task.Delay(DelayCalc());    
             }
         }
 
@@ -50,31 +56,53 @@ namespace ClickControl
             return r.Next(a, b);
         }
 
+        private static async Task PressButton(string key)
+        {
+            _ = AutoItX.ControlSend(windowTitle, "", "", key);
+            await Task.Delay(Time_Between_Events + DelayCalc());
+        }
+
         private static async Task PostAuctions(int Number_of_Reposts)
         {
             //repeat x number of times
             for (int i = 0; i < Number_of_Reposts; i++)
             {
                 // tar auctioneer
-                _ = AutoItX.ControlSend(windowTitle, "", "", "1");
-                await Task.Delay(Time_Between_Events + DelayCalc());
+                await PressButton("1");
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
 
                 // open aucitoneer panel
-                _ = AutoItX.ControlSend(windowTitle, "", "", "0");
-                await Task.Delay(Time_Between_Events + DelayCalc());
+                await PressButton("0");
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
 
                 // run post scan
-                _ = AutoItX.ControlSend(windowTitle, "", "", "2");
-                await Task.Delay(Search_Duration + DelayCalc());
+                await PressButton("2");
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
 
                 // post                
                 RunClickerAsync();
                 await Task.Delay(Clicker_Duration + DelayCalc());
                 clickerState = false;
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
 
                 // close auctioneer panel
-                _ = AutoItX.ControlSend(windowTitle, "", "", "{esc}");
-                await Task.Delay(Search_Duration + DelayCalc());
+                await PressButton("{esc}");
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
             }
         }
 
@@ -88,11 +116,11 @@ namespace ClickControl
         private static async Task Logout()
         {
             //take screenshot
-            _ = AutoItX.ControlSend(windowTitle, "", "", "{}");
+            //_ = AutoItX.ControlSend(windowTitle, "", "", "{}");
 
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-            await Task.Delay(Time_Between_Events + DelayCalc());
+            await Task.Delay(Logon_Wait + DelayCalc());
         }
 
         private static async Task GoToGlyphChar(int currentChar)
@@ -115,6 +143,12 @@ namespace ClickControl
             }
         }
 
+        // [+] make window smaller
+        // [+] set logoff wait to be same as logon
+        // [+] to be able to break out whenever I hit stop
+        // [+] option to have it cycle or just run once
+        // [] write on set all to text file to save settings
+
         public static async void RunAuctionPostAsync()
         {
             int numChars = Number_Characters;
@@ -127,26 +161,60 @@ namespace ClickControl
                 {
                     //login enchants
                     await Login();
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //post just once
                     await PostAuctions(1);
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //logout
                     await Logout();
-
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //Go to glyphs                
                     await GoToGlyphChar(currentChar);
-
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //login glyphs
                     await Login();
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //post
-                    await PostAuctions(Number_Reposts);                   
+                    await PostAuctions(Number_Reposts);
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                     //logout
                     await Logout();
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
 
                     //Reset
-                    await ReturnToTop(currentChar);                    
+                    await ReturnToTop(currentChar);
+                    if (!posterState) // if stopped break
+                    {
+                        break;
+                    }
                 }
+
+                if (!continuousLoop) // if false only run once
+                {
+                    posterState = false;
+                }                
             }
-            
         }
 
         public static void Set_Settings()
@@ -179,4 +247,3 @@ namespace ClickControl
         }
     }
 }
-

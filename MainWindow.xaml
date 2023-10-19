@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Clicker"
     Width="399"
-    Height="491"
+    Height="293"
     Background="Gray"    
     mc:Ignorable="d">
     <Grid x:Name="Whole_thing_I_guess">
@@ -166,10 +166,12 @@
         <!--  AH Bot Portion  -->
         <Grid
             x:Name="bot_Portion"
-            Height="330"
-            Margin="0,125,0,0"
-            VerticalAlignment="Top"
+            Margin="0,125,0,-39"
             Background="CornflowerBlue" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="101*"/>
+                <ColumnDefinition Width="32*"/>
+            </Grid.ColumnDefinitions>
             <Button
                 x:Name="posterStart"
                 Width="75"
@@ -188,132 +190,100 @@
                 Content="Stop" 
                 IsEnabled="False" />
             <Label
-	           Margin="193,51,87,261"
+	           Margin="117,43,67,0"
 	           Padding="0"
-	           Content="Clicker Duration"
-	           FontSize="10" />
+	           Content="Clicker Duration"               
+	           FontSize="10" Height="17" VerticalAlignment="Top"/>
             <Label
-	           Margin="193,10,87,309"
+	           Margin="117,26,67,0"
 	           Padding="0"
 	           Content="Search Duration"
-	           FontSize="10" />
+	           FontSize="10" Height="17" VerticalAlignment="Top"/>
             <TextBox
 			    x:Name="Search_Duration_text"
-			    Width="120"
-			    Height="23"
-			    Margin="191,26,88,281"
+			    Height="17"
+			    Margin="232,26,22,0"
+                VerticalAlignment="Top"
 			    TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Clicker_Duration_text"
-	          Width="120"
-	          Height="23"
-	          Margin="191,69,88,238"
-	          TextWrapping="Wrap" />
+	          Height="17"
+	          Margin="232,43,22,0"
+	          VerticalAlignment="Top"
+              TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Wait_For_Login_text"
-	          Width="120"
-	          Height="23"
-	          Margin="190,106,89,201"
+	          Height="17"
+	          Margin="232,60,22,0"
+              VerticalAlignment="Top"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Time_Between_Events_text"
-	          Width="120"
-	          Height="23"
-	          Margin="190,145,89,162"
-	          TextWrapping="Wrap" 
-              RenderTransformOrigin="0.496,-5.237" />
+	          Height="17"
+	          Margin="232,77,21,0"
+              VerticalAlignment="Top"
+	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Number_Of_Characters_text"
-	          Width="120"
-	          Height="23"
-	          Margin="190,182,89,125"
-	          TextWrapping="Wrap"/>
+	          Height="17"
+	          Margin="232,94,21,0"              
+              VerticalAlignment="Top"
+	          TextWrapping="Wrap" />
             <TextBox
-                x:Name="Number_Of_Reposts_text"
-                Width="120"
-                Height="23"
-                Margin="190,221,89,86"
-                TextWrapping="Wrap" />
+              x:Name="Number_Of_Reposts_text"
+              Height="17"
+              Margin="232,111,21,0"
+              VerticalAlignment="Top"
+              TextWrapping="Wrap" />
             <Label
-	          Margin="191,92,89,224"
+	          Margin="117,60,67,0"
 	          Padding="0"
-	          Content="Wait for logon"
+	          Content="Wait on logon/logoff"
+              Height="17" VerticalAlignment="Top" 
 	          FontSize="10" />
             <Label
-	          Margin="193,129,87,190"
+	          Margin="117,77,67,0"
 	          Padding="0"
 	          Content="Time Between Events"
-	          FontSize="10" />
+	          FontSize="10" 
+              VerticalAlignment="Top" Height="17" />
             <Label
-		      Margin="191,167,89,146"
+		      Margin="117,95,67,0"
 		      Padding="0"
 		      Content="Number of Characters"
-		      FontSize="10" RenderTransformOrigin="0.5,0.5" >
-            </Label>
+		      FontSize="10" Height="16" VerticalAlignment="Top" />
             <Label
-                Margin="193,205,87,108"
+                Margin="117,111,67,0"
                 Padding="0"
-                Content="Number of Reposts"
-                FontSize="10" RenderTransformOrigin="0.5,0.5" />
-            <Button
-               Width="23"
-               Height="23"
-               Margin="316,25,0,0"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-               Click="Search_Duration"
-               Content="Ok" RenderTransformOrigin="1.962,0.776" />
-            <Button
-                Width="23"
-                Height="23"
-                Margin="319,65,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Clicker_Duration"
-                Content="Ok" RenderTransformOrigin="8.177,2.269" />
-            <Button
-                Width="23"
-                Height="23"                
-                Margin="318,106,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Wait_For_Login"
-                Content="Ok" RenderTransformOrigin="8.177,2.269" />
-            <Button
-                Width="22"
-                Height="23"
-                Margin="319,143,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Time_Between_Events"
-                Content="Ok" RenderTransformOrigin="8.177,2.269" />
-            <Button
-                Width="23"
-                Height="23"
-                Margin="318,182,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Number_Of_Characters"
-                Content="Ok" RenderTransformOrigin="8.177,2.269" />
-            <Button
-                Width="23"
-                Height="23"
-                Margin="319,221,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Number_Of_Reposts"
-                Content="Ok" RenderTransformOrigin="8.177,2.269" />
+                Content="Number of Reposts"                
+                FontSize="10" 
+                VerticalAlignment="Top" Height="17"/>
             <Button
                 Width="65"
-                Height="15"
-                Margin="319,249,0,0"
+                Height="16"
+                Margin="29,92,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="Set_All"
                 Content="Set All" 
                 FontSize="8"
                 RenderTransformOrigin="8.177,2.269" />
-
+            <CheckBox
+                x:Name="Continuous_Loop"                     
+                Checked="Set_Continuous_Loop"
+                Unchecked="Unset_Continuous_Loop"
+                IsChecked="false"
+                Width="15"
+                Height="15"
+                Margin="35,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" RenderTransformOrigin="1.4,0.869" Grid.Column="1" />
+            <Label
+                Margin="350,8,0,0"
+                Padding="0"
+                Content="Loop"
+                Height="17" VerticalAlignment="Top"
+                FontSize="10" Grid.ColumnSpan="2" />
         </Grid>
     </Grid>
 </Window>
