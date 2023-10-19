@@ -38,11 +38,6 @@ namespace ClickControl
             clickerState = true;
             while (clickerState)
             {
-                if (!posterState) // if stopped break
-                {
-                    break;
-                }
-
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
                 await Task.Delay(DelayCalc());    
             }

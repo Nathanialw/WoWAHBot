@@ -69,12 +69,23 @@ namespace test
         //Bottom bot portion
         private void Posting_Start(object sender, RoutedEventArgs e)
         {
+            if (clickerStop.IsEnabled && !clickerStart.IsEnabled)
+            {
+                clickerStop.IsEnabled = false;
+                clickerStart.IsEnabled = true;
+            }
+
             posterStart.IsEnabled = false;
             posterStop.IsEnabled = true;
             Clicker.RunAuctionPostAsync();
         }
         private void Posting_Stop(object sender, RoutedEventArgs e)
         {
+            if (clickerStop.IsEnabled && !clickerStart.IsEnabled) {
+                clickerStop.IsEnabled = false;
+                clickerStart.IsEnabled = true;
+            }
+
             posterStop.IsEnabled = false;
             posterStart.IsEnabled = true;
             Clicker.posterState = false;
@@ -125,14 +136,12 @@ namespace test
 
         private void Set_Continuous_Loop(object sender, RoutedEventArgs e)
         {
-            Clicker.continuousLoop = true;
-            
+            Clicker.continuousLoop = true;            
         }
 
         private void Unset_Continuous_Loop(object sender, RoutedEventArgs e)
         {
-            Clicker.continuousLoop = false;
-            
+            Clicker.continuousLoop = false;            
         }
     }
 }
