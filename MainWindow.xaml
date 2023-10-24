@@ -82,53 +82,53 @@
                         <!--  Milling button  -->
                         <Button
                              x:Name="Milling"
-                             Width="30"
-                             Height="10"
-                             Margin="213,77,0,0"
+                             Width="44"
+                             Height="17"
+                             Margin="199,73,0,0"
                              Padding="0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
                              Click="Set_Milling"
                              Content="Milling"
-                             FontSize="7"
+                             FontSize="12"
                              IsEnabled="True" />
                         <!--  Reset button  -->
                         <Button
                             x:Name="Reset"
-                            Width="30"
-                            Height="10"
-                            Margin="164,77,0,0"
+                            Width="44"
+                            Height="17"
+                            Margin="150,73,0,0"
                             Padding="0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Click="Reset_Delay"
                             Content="Reset"
-                            FontSize="7"
+                            FontSize="12"
                             IsEnabled="True" />
                         <Button
                             x:Name="Crafting"
-                            Width="30"
-                            Height="10"
-                            Margin="248,77,0,0"
+                            Width="45"
+                            Height="17"
+                            Margin="249,73,0,0"
                             Padding="0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Click="Set_Crafting"
                             Content="Crafting"
-                            FontSize="7"
+                            FontSize="12"
                             IsEnabled="True" />
                         <Button
                             x:Name="Auction"
-                            Width="30"
-                            Height="10"
-                            Margin="283,77,0,0"
+                            Width="49"
+                            Height="17"
+                            Margin="299,73,0,0"
                             Padding="0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Click="Set_Auction"
                             Content="Auction"
-                            FontSize="7"
-                            IsEnabled="True" />
+                            FontSize="12"
+                            IsEnabled="True" RenderTransformOrigin="0.217,0.425" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="Options">

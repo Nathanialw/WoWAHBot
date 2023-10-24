@@ -59,7 +59,8 @@ namespace test
             Clicker.Slider_Pos = 1200;
             Milling.IsEnabled = false;
             Speed.IsEnabled = false;
-            
+            Speed.Value = 1200;
+
             Crafting.IsEnabled = true;
             Auction.IsEnabled = true;
         }
@@ -68,15 +69,17 @@ namespace test
             Clicker.Slider_Pos = 5000;
             Crafting.IsEnabled = false;
             Speed.IsEnabled = false;
+            Speed.Value = 5000;
 
             Milling.IsEnabled = true;
             Auction.IsEnabled = true;
         }
         private void Set_Auction(object sender, RoutedEventArgs e)
         {
-            Clicker.Slider_Pos = 120;
+            Clicker.Slider_Pos = 200;
             Auction.IsEnabled = false;
             Speed.IsEnabled = false;
+            Speed.Value = 200;
 
             Milling.IsEnabled = true;
             Crafting.IsEnabled = true;
@@ -84,11 +87,13 @@ namespace test
 
         private void Reset_Delay(object sender, RoutedEventArgs e)
         {
-            Clicker.Slider_Pos = 100;
+            Clicker.Slider_Pos = 200;
             Milling.IsEnabled = true;
+            Speed.IsEnabled = true;
+            Speed.Value = 200;
+
             Crafting.IsEnabled = true;
             Auction.IsEnabled = true;
-            Speed.IsEnabled = true;
         }
 
         private void variance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
