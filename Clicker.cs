@@ -27,10 +27,12 @@ namespace ClickControl
 
         public static int Search_Duration;
         public static int Clicker_Duration;
+        public static int Delay_Between_Posts;
         public static int Logon_Wait;
         public static int Time_Between_Events;
         public static int Number_Characters;
         public static int Number_Reposts;
+        
 
         //methods
         public static async void RunClickerAsync()
@@ -83,6 +85,8 @@ namespace ClickControl
                     break;
                 }
 
+                //hit pause, run clicker
+
                 // post                
                 RunClickerAsync();
                 await Task.Delay(Clicker_Duration + DelayCalc());
@@ -94,6 +98,13 @@ namespace ClickControl
 
                 // close auctioneer panel
                 await PressButton("{esc}");
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
+
+                // wait between posts
+                await Task.Delay(Delay_Between_Posts);
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -138,11 +149,10 @@ namespace ClickControl
             }
         }
 
-        // [+] make window smaller
-        // [+] set logoff wait to be same as logon
-        // [+] to be able to break out whenever I hit stop
-        // [+] option to have it cycle or just run once
-        // [] write on set all to text file to save settings
+        // [+] buttons for presets for clicker "time between clicks"
+        // [+] add wait between posts option
+        // [] add keystrokes during auction search to press pause on search and start posting from there
+        // [] write to text file on set all press to save settings
 
         public static async void RunAuctionPostAsync()
         {
@@ -220,21 +230,23 @@ namespace ClickControl
             {
                 string[] lines = File.ReadAllLines(path);
 
-                if (lines.Length == 6)
+                if (lines.Length == 7)
                 {
                     Search_Duration = Convert.ToInt32(lines[0]) * 1000;
                     Clicker_Duration = Convert.ToInt32(lines[1]) * 1000;
                     Logon_Wait = Convert.ToInt32(lines[2]) * 1000;
-                    Time_Between_Events = Convert.ToInt32(lines[3]) * 1000;
-                    Number_Characters = Convert.ToInt32(lines[4]);
-                    Number_Reposts = Convert.ToInt32(lines[5]);
+                    Delay_Between_Posts = Convert.ToInt32(lines[3]) * 1000;
+                    Time_Between_Events = Convert.ToInt32(lines[4]) * 1000;
+                    Number_Characters = Convert.ToInt32(lines[5]);
+                    Number_Reposts = Convert.ToInt32(lines[6]);
                 }
             }
             catch
             {
                 Search_Duration = 60 * 1000;
                 Clicker_Duration = 180 * 1000;
-                Logon_Wait = 30 * 1000;
+                Logon_Wait = 45 * 1000;
+                Delay_Between_Posts = 30 * 1000;
                 Time_Between_Events = 5 * 1000;
                 Number_Characters = 5;
                 Number_Reposts = 10;

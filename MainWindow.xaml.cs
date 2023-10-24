@@ -31,6 +31,7 @@ namespace test
             Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration / 1000);
             Clicker_Duration_text.Text = Convert.ToString(Clicker.Clicker_Duration / 1000);
             Wait_For_Login_text.Text = Convert.ToString(Clicker.Logon_Wait / 1000);
+            Delay_Between_Posts_text.Text = Convert.ToString(Clicker.Delay_Between_Posts / 1000);
             Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events / 1000);
             Number_Of_Characters_text.Text = Convert.ToString(Clicker.Number_Characters);
             Number_Of_Reposts_text.Text = Convert.ToString(Clicker.Number_Reposts);
@@ -53,6 +54,43 @@ namespace test
         {
             Clicker.Slider_Pos = Convert.ToInt32(e.NewValue);
         }
+        private void Set_Milling(object sender, RoutedEventArgs e)
+        {                        
+            Clicker.Slider_Pos = 1200;
+            Milling.IsEnabled = false;
+            Speed.IsEnabled = false;
+            
+            Crafting.IsEnabled = true;
+            Auction.IsEnabled = true;
+        }
+        private void Set_Crafting(object sender, RoutedEventArgs e)
+        {
+            Clicker.Slider_Pos = 5000;
+            Crafting.IsEnabled = false;
+            Speed.IsEnabled = false;
+
+            Milling.IsEnabled = true;
+            Auction.IsEnabled = true;
+        }
+        private void Set_Auction(object sender, RoutedEventArgs e)
+        {
+            Clicker.Slider_Pos = 120;
+            Auction.IsEnabled = false;
+            Speed.IsEnabled = false;
+
+            Milling.IsEnabled = true;
+            Crafting.IsEnabled = true;
+        }
+
+        private void Reset_Delay(object sender, RoutedEventArgs e)
+        {
+            Clicker.Slider_Pos = 100;
+            Milling.IsEnabled = true;
+            Crafting.IsEnabled = true;
+            Auction.IsEnabled = true;
+            Speed.IsEnabled = true;
+        }
+
         private void variance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Clicker.variance = Convert.ToInt32(e.NewValue);
@@ -81,7 +119,8 @@ namespace test
         }
         private void Posting_Stop(object sender, RoutedEventArgs e)
         {
-            if (clickerStop.IsEnabled && !clickerStart.IsEnabled) {
+            if (clickerStop.IsEnabled && !clickerStart.IsEnabled)
+            {
                 clickerStop.IsEnabled = false;
                 clickerStart.IsEnabled = true;
             }
@@ -107,6 +146,16 @@ namespace test
             Clicker.Logon_Wait = Convert.ToInt32(Wait_For_Login_text.Text) * 1000;
         }
 
+        private void Delay_Between_Posts(object sender, RoutedEventArgs e)
+        {
+            Clicker.Delay_Between_Posts = Convert.ToInt32(Delay_Between_Posts_text.Text);
+        }
+
+        private void Number_Of_Reposts(object sender, RoutedEventArgs e)
+        {
+            Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
+        }
+
         private void Time_Between_Events(object sender, RoutedEventArgs e)
         {
             Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
@@ -117,16 +166,12 @@ namespace test
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
         }
 
-        private void Number_Of_Reposts(object sender, RoutedEventArgs e)
-        {
-            Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
-        }
-
         private void Set_All(object sender, RoutedEventArgs e)
         {
             Clicker.Search_Duration = Convert.ToInt32(Search_Duration_text.Text) * 1000;
             Clicker.Clicker_Duration = Convert.ToInt32(Clicker_Duration_text.Text) * 1000;
             Clicker.Logon_Wait = Convert.ToInt32(Wait_For_Login_text.Text) * 1000;
+            Clicker.Delay_Between_Posts = Convert.ToInt32(Delay_Between_Posts_text.Text) * 1000;
             Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
             Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
@@ -136,12 +181,12 @@ namespace test
 
         private void Set_Continuous_Loop(object sender, RoutedEventArgs e)
         {
-            Clicker.continuousLoop = true;            
+            Clicker.continuousLoop = true;
         }
 
         private void Unset_Continuous_Loop(object sender, RoutedEventArgs e)
         {
-            Clicker.continuousLoop = false;            
+            Clicker.continuousLoop = false;
         }
     }
 }

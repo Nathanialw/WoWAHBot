@@ -79,6 +79,56 @@
                             Minimum="1"
                             ValueChanged="Delay_Slider"
                             Value="200" />
+                        <!--  Milling button  -->
+                        <Button
+                             x:Name="Milling"
+                             Width="30"
+                             Height="10"
+                             Margin="213,77,0,0"
+                             Padding="0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                             Click="Set_Milling"
+                             Content="Milling"
+                             FontSize="7"
+                             IsEnabled="True" />
+                        <!--  Reset button  -->
+                        <Button
+                            x:Name="Reset"
+                            Width="30"
+                            Height="10"
+                            Margin="164,77,0,0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Click="Reset_Delay"
+                            Content="Reset"
+                            FontSize="7"
+                            IsEnabled="True" />
+                        <Button
+                            x:Name="Crafting"
+                            Width="30"
+                            Height="10"
+                            Margin="248,77,0,0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Click="Set_Crafting"
+                            Content="Crafting"
+                            FontSize="7"
+                            IsEnabled="True" />
+                        <Button
+                            x:Name="Auction"
+                            Width="30"
+                            Height="10"
+                            Margin="283,77,0,0"
+                            Padding="0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Click="Set_Auction"
+                            Content="Auction"
+                            FontSize="7"
+                            IsEnabled="True" />
                     </Grid>
                 </TabItem>
                 <TabItem Header="Options">
@@ -166,8 +216,8 @@
         <!--  AH Bot Portion  -->
         <Grid
             x:Name="bot_Portion"
-            Margin="0,125,0,-39"
-            Background="CornflowerBlue" Grid.ColumnSpan="3">
+            Margin="0,125,0,0"
+            Background="CornflowerBlue" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="399">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="101*"/>
                 <ColumnDefinition Width="32*"/>
@@ -190,70 +240,70 @@
                 Content="Stop" 
                 IsEnabled="False" />
             <Label
-	           Margin="117,43,67,0"
+	           Margin="117,46,67,0"
 	           Padding="0"
 	           Content="Clicker Duration"               
 	           FontSize="10" Height="17" VerticalAlignment="Top"/>
             <Label
-	           Margin="117,26,67,0"
+	           Margin="117,29,67,0"
 	           Padding="0"
 	           Content="Search Duration"
 	           FontSize="10" Height="17" VerticalAlignment="Top"/>
             <TextBox
 			    x:Name="Search_Duration_text"
-			    Height="17"
-			    Margin="232,26,22,0"
+			    Height="16"
+			    Margin="232,30,21,0"
                 VerticalAlignment="Top"
 			    TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Clicker_Duration_text"
 	          Height="17"
-	          Margin="232,43,22,0"
+	          Margin="232,46,21,0"
 	          VerticalAlignment="Top"
-              TextWrapping="Wrap" />
+              TextWrapping="Wrap" RenderTransformOrigin="0.476,-0.149" />
             <TextBox
 	          x:Name="Wait_For_Login_text"
 	          Height="17"
-	          Margin="232,60,22,0"
+	          Margin="232,62,21,0"
               VerticalAlignment="Top"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Time_Between_Events_text"
 	          Height="17"
-	          Margin="232,77,21,0"
+	          Margin="232,94,21,0"
               VerticalAlignment="Top"
 	          TextWrapping="Wrap" />
             <TextBox
 	          x:Name="Number_Of_Characters_text"
 	          Height="17"
-	          Margin="232,94,21,0"              
+	          Margin="232,111,21,0"              
               VerticalAlignment="Top"
 	          TextWrapping="Wrap" />
             <TextBox
               x:Name="Number_Of_Reposts_text"
               Height="17"
-              Margin="232,111,21,0"
+              Margin="232,128,21,0"
               VerticalAlignment="Top"
               TextWrapping="Wrap" />
             <Label
-	          Margin="117,60,67,0"
+	          Margin="117,63,67,0"
 	          Padding="0"
 	          Content="Wait on logon/logoff"
               Height="17" VerticalAlignment="Top" 
 	          FontSize="10" />
             <Label
-	          Margin="117,77,67,0"
+	          Margin="117,94,67,0"
 	          Padding="0"
 	          Content="Time Between Events"
 	          FontSize="10" 
               VerticalAlignment="Top" Height="17" />
             <Label
-		      Margin="117,95,67,0"
+		      Margin="117,111,67,0"
 		      Padding="0"
 		      Content="Number of Characters"
 		      FontSize="10" Height="16" VerticalAlignment="Top" />
             <Label
-                Margin="117,111,67,0"
+                Margin="117,128,67,0"
                 Padding="0"
                 Content="Number of Reposts"                
                 FontSize="10" 
@@ -279,11 +329,23 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" RenderTransformOrigin="1.4,0.869" Grid.Column="1" />
             <Label
-                Margin="350,8,0,0"
+                Margin="55,8,-8,0"
                 Padding="0"
                 Content="Loop"
                 Height="17" VerticalAlignment="Top"
-                FontSize="10" Grid.ColumnSpan="2" />
+                FontSize="10" Grid.Column="1" />
+            <Label
+                Margin="117,79,67,0"
+                Padding="0"
+                Content="Delay Between Posts"
+                FontSize="10" 
+                VerticalAlignment="Top" Height="17" />
+            <TextBox
+                x:Name="Delay_Between_Posts_text"
+                Height="17"
+                Margin="232,79,21,0"
+                VerticalAlignment="Top"
+                TextWrapping="Wrap"/>
         </Grid>
     </Grid>
 </Window>
