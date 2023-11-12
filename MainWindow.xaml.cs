@@ -25,7 +25,6 @@ namespace test
     {
         public MainWindow()
         {
-
             InitializeComponent();
             Clicker.Set_Settings();
             Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration / 1000);
@@ -35,6 +34,16 @@ namespace test
             Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events / 1000);
             Number_Of_Characters_text.Text = Convert.ToString(Clicker.Number_Characters);
             Number_Of_Reposts_text.Text = Convert.ToString(Clicker.Number_Reposts);
+
+            int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
+
+            int Hours = ETA_Seconds / 3600;
+            int Remaining_Seconds = (ETA_Seconds - (Hours * 3600));
+            int Minutes = Remaining_Seconds / 60;
+            float Secs = (float)ETA_Seconds - ((float)Hours * 3600.0f) - ((float)Minutes * 60.0f);
+            int Seconds = (int)(60.0f * Secs);
+
+            ETA_Value_Text.Content = Convert.ToString(Hours) + ":" + Convert.ToString(Minutes) + ":" + Convert.ToString(Secs);
         }
 
         //Top clicker portion
@@ -181,6 +190,18 @@ namespace test
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
             Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
 
+            int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
+
+            int Hours = ETA_Seconds / 3600;
+            int Remaining_Seconds = (ETA_Seconds - (Hours * 3600));
+            int Minutes = Remaining_Seconds / 60;
+            float Secs = (float)ETA_Seconds - ((float)Hours * 3600.0f) - ((float)Minutes * 60.0f);
+            int Seconds = (int)(60.0f * Secs);
+
+            ETA_Value_Text.Content = Convert.ToString(Hours) + ":" + Convert.ToString(Minutes) + ":" + Convert.ToString(Secs); 
+                
+            
+
             //write it to text file to save settings
         }
 
@@ -193,5 +214,6 @@ namespace test
         {
             Clicker.continuousLoop = false;
         }
+  
     }
 }

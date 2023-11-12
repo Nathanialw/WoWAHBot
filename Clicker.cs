@@ -149,8 +149,7 @@ namespace ClickControl
             }
         }
 
-        // [+] buttons for presets for clicker "time between clicks"
-        // [+] add wait between posts option
+        // [+] add ETA estimate
         // [] add keystrokes during auction search to press pause on search and start posting from there
         // [] write to text file on set all press to save settings
 

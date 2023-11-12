@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Clicker"
     Width="399"
-    Height="293"
+    Height="305"
     Background="Gray"    
     mc:Ignorable="d">
     <Grid x:Name="Whole_thing_I_guess">
@@ -346,6 +346,19 @@
                 Margin="232,79,21,0"
                 VerticalAlignment="Top"
                 TextWrapping="Wrap"/>
+            <Label
+                Margin="292,87,81,0"
+                Padding="0"
+                Content="ETA:"                
+                FontSize="10" 
+                VerticalAlignment="Top" Height="17" RenderTransformOrigin="1.969,-2.184" Grid.ColumnSpan="2"/>
+            <Label
+                Margin="15,85,17,0"
+                Padding="0"
+                Name="ETA_Value_Text"
+                Content=""                
+                FontSize="12" 
+                VerticalAlignment="Top" Height="17" RenderTransformOrigin="1.969,-2.184" Grid.Column="1"/>
         </Grid>
     </Grid>
 </Window>
