@@ -33,15 +33,42 @@ namespace ClickControl
         public static int Number_Characters;
         public static int Number_Reposts;
 
+        // [+] fixed failing to cancel bot bug
+        // [] add continuous search/post mode 
+        // [] add visualization of state of the bot
+        // [] add time that bot will complete at
+        //maybe we can put an async while loop that checks if the bot is done to control the start/stop buttons
 
         //methods
+        public static async Task Delay(int duration) {
+            int interval = 1000;
+            while (0 < duration)
+            {
+                if (duration >= 1000)
+                {
+                    duration -= interval;
+                }
+                else
+                {
+                    interval = duration;
+                }
+                
+                await Task.Delay(interval);
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
+            }
+            clickerState = false;
+        }
+            
         public static async void RunClickerAsync()
         {
             clickerState = true;
             while (clickerState)
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
-                await Task.Delay(DelayCalc());
+                await Delay(DelayCalc());
             }
         }
 
@@ -56,13 +83,13 @@ namespace ClickControl
         private static async Task PressButton(string key)
         {
             _ = AutoItX.ControlSend(windowTitle, "", "", key);
-            await Task.Delay(Time_Between_Events + DelayCalc());
+            await Delay(Time_Between_Events + DelayCalc());
         }
 
-        private static async Task PostAuctions(int Number_of_Reposts)
+        private static async Task PostAuctions()
         {
             //repeat x number of times
-            for (int i = 0; i < Number_of_Reposts; i++)
+            for (int i = 0; i < Number_Reposts; i++)
             {
                 // tar auctioneer
                 await PressButton("1");
@@ -89,7 +116,7 @@ namespace ClickControl
 
                 // post                
                 RunClickerAsync();
-                await Task.Delay(Clicker_Duration + DelayCalc());
+                await Delay(Clicker_Duration + DelayCalc());
                 clickerState = false;
                 if (!posterState) // if stopped break
                 {
@@ -104,7 +131,7 @@ namespace ClickControl
                 }
 
                 // wait between posts
-                await Task.Delay(Delay_Between_Posts);
+                await Delay(Delay_Between_Posts);
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -112,11 +139,60 @@ namespace ClickControl
             }
         }
 
+        private static async Task PostAuctionsOnce()
+        {
+            // tar auctioneer
+            await PressButton("1");
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+
+            // open aucitoneer panel
+            await PressButton("0");
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+
+            // run post scan
+            await PressButton("2");
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+
+            //hit pause, run clicker
+
+            // post                
+            RunClickerAsync();
+            await Delay(Clicker_Duration + DelayCalc());
+            clickerState = false;
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+
+            // close auctioneer panel
+            await PressButton("{esc}");
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+
+            // wait between posts
+            await Delay(Delay_Between_Posts);
+            if (!posterState) // if stopped break
+            {
+                return;
+            }
+        }
+
         private static async Task Login()
         {
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
-            await Task.Delay(Logon_Wait + DelayCalc());
+            await Delay(Logon_Wait + DelayCalc());
         }
 
         private static async Task Logout()
@@ -126,7 +202,7 @@ namespace ClickControl
 
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-            await Task.Delay(Logon_Wait + DelayCalc());
+            await Delay(Logon_Wait + DelayCalc());
         }
 
         private static async Task GoToGlyphChar(int currentChar)
@@ -135,7 +211,11 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                await Task.Delay(Time_Between_Events + DelayCalc());
+                await Delay(Time_Between_Events + DelayCalc());
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
             }
         }
 
@@ -145,22 +225,22 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
-                await Task.Delay(Time_Between_Events + DelayCalc());
+                await Delay(Time_Between_Events + DelayCalc());
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
             }
         }
-        
-        // [+] write to text file on set all press to save settings
-        // [] add keystrokes during auction search to press pause on search and start posting from there
 
         public static async void RunAuctionPostAsync()
         {
-            int numChars = Number_Characters;
             posterState = true;
 
             //needs to be able to pause or end
             while (posterState)
             {
-                for (int currentChar = 1; currentChar <= numChars; currentChar++)
+                for (int currentChar = 1; currentChar <= Number_Characters; currentChar++)
                 {
                     //login enchants
                     await Login();
@@ -169,7 +249,7 @@ namespace ClickControl
                         break;
                     }
                     //post just once
-                    await PostAuctions(1);
+                    await PostAuctionsOnce();
                     if (!posterState) // if stopped break
                     {
                         break;
@@ -193,7 +273,7 @@ namespace ClickControl
                         break;
                     }
                     //post
-                    await PostAuctions(Number_Reposts);
+                    await PostAuctions();
                     if (!posterState) // if stopped break
                     {
                         break;

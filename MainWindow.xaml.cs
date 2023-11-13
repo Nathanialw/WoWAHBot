@@ -52,7 +52,8 @@ namespace test
             Clicker.Set_Settings();
             Show_Settings();
             Show_ETA();
-            
+
+            //maybe we can put an async while loop that checks if the bot is done to control the start/stop buttons
         }
 
         //Top clicker portion
