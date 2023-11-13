@@ -308,16 +308,6 @@
                 Content="Number of Reposts"                
                 FontSize="10" 
                 VerticalAlignment="Top" Height="17"/>
-            <Button
-                Width="65"
-                Height="16"
-                Margin="29,92,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="Set_All"
-                Content="Set All" 
-                FontSize="8"
-                RenderTransformOrigin="8.177,2.269" />
             <CheckBox
                 x:Name="Continuous_Loop"                     
                 Checked="Set_Continuous_Loop"
@@ -359,6 +349,36 @@
                 Content=""                
                 FontSize="12" 
                 VerticalAlignment="Top" Height="17" RenderTransformOrigin="1.969,-2.184" Grid.Column="1"/>
+            <Button
+                Width="65"
+                Height="16"
+                Margin="29,81,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"                
+                Click="Save_Settings"
+                Content="Save Settings" 
+                FontSize="8"
+                RenderTransformOrigin="8.177,2.269" />
+            <Button
+                Width="65"
+                Height="16"
+                Margin="29,119,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Load_Defaults"
+                Content="Load Defaults" 
+                FontSize="8"
+                RenderTransformOrigin="8.177,2.269" />
+            <Button
+                Width="65"
+                Height="16"
+                Margin="29,101,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Load_Settings"
+                Content="Load Settings" 
+                FontSize="8"
+                RenderTransformOrigin="8.177,2.269" />
         </Grid>
     </Grid>
 </Window>

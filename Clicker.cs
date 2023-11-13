@@ -32,7 +32,7 @@ namespace ClickControl
         public static int Time_Between_Events;
         public static int Number_Characters;
         public static int Number_Reposts;
-        
+
 
         //methods
         public static async void RunClickerAsync()
@@ -41,7 +41,7 @@ namespace ClickControl
             while (clickerState)
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
-                await Task.Delay(DelayCalc());    
+                await Task.Delay(DelayCalc());
             }
         }
 
@@ -148,10 +148,9 @@ namespace ClickControl
                 await Task.Delay(Time_Between_Events + DelayCalc());
             }
         }
-
-        // [+] add ETA estimate
+        
+        // [+] write to text file on set all press to save settings
         // [] add keystrokes during auction search to press pause on search and start posting from there
-        // [] write to text file on set all press to save settings
 
         public static async void RunAuctionPostAsync()
         {
@@ -217,17 +216,62 @@ namespace ClickControl
                 if (!continuousLoop) // if false only run once
                 {
                     posterState = false;
-                }                
+                }
+            }
+        }
+
+        public static void Save_Settings()
+        {
+            var userPath = "./user_settings.txt";
+
+            string[] wlines = {
+                    Convert.ToString(Search_Duration / 1000),
+                    Convert.ToString(Clicker_Duration / 1000),
+                    Convert.ToString(Logon_Wait / 1000),
+                    Convert.ToString(Delay_Between_Posts / 1000),
+                    Convert.ToString(Time_Between_Events  / 1000),
+                    Convert.ToString(Number_Characters),
+                    Convert.ToString(Number_Reposts)
+            };
+
+            File.WriteAllLines("./user_settings.txt", wlines);
+        }
+
+        public static void Load_Default_Settings()
+        {
+            var defaultPath = "./default_settings.txt";
+
+            string[] lines = File.ReadAllLines(defaultPath);
+
+            if (lines.Length == 7)
+            {
+                Search_Duration = Convert.ToInt32(lines[0]) * 1000;
+                Clicker_Duration = Convert.ToInt32(lines[1]) * 1000;
+                Logon_Wait = Convert.ToInt32(lines[2]) * 1000;
+                Delay_Between_Posts = Convert.ToInt32(lines[3]) * 1000;
+                Time_Between_Events = Convert.ToInt32(lines[4]) * 1000;
+                Number_Characters = Convert.ToInt32(lines[5]);
+                Number_Reposts = Convert.ToInt32(lines[6]);
+            }
+            else
+            {
+                Search_Duration = 120 * 1000;
+                Clicker_Duration = 240 * 1000;
+                Logon_Wait = 130 * 1000;
+                Delay_Between_Posts = 5 * 1000;
+                Time_Between_Events = 5 * 1000;
+                Number_Characters = 5;
+                Number_Reposts = 20;
             }
         }
 
         public static void Set_Settings()
-        {
-            var path = "./settings.txt";
-            
+        {            
+            var userPath = "./user_settings.txt";
+
             try
             {
-                string[] lines = File.ReadAllLines(path);
+                string[] lines = File.ReadAllLines(userPath);
 
                 if (lines.Length == 7)
                 {
@@ -242,13 +286,20 @@ namespace ClickControl
             }
             catch
             {
-                Search_Duration = 60 * 1000;
-                Clicker_Duration = 180 * 1000;
-                Logon_Wait = 45 * 1000;
-                Delay_Between_Posts = 30 * 1000;
-                Time_Between_Events = 5 * 1000;
-                Number_Characters = 5;
-                Number_Reposts = 10;
+                try
+                {
+                    Load_Default_Settings();
+                }
+                catch
+                {
+                    Search_Duration = 120 * 1000;
+                    Clicker_Duration = 240 * 1000;
+                    Logon_Wait = 130 * 1000;
+                    Delay_Between_Posts = 5 * 1000;
+                    Time_Between_Events = 5 * 1000;
+                    Number_Characters = 5;
+                    Number_Reposts = 20;
+                }
             }
         }
     }

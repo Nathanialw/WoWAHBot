@@ -23,10 +23,8 @@ namespace test
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private void Show_Settings()
         {
-            InitializeComponent();
-            Clicker.Set_Settings();
             Search_Duration_text.Text = Convert.ToString(Clicker.Search_Duration / 1000);
             Clicker_Duration_text.Text = Convert.ToString(Clicker.Clicker_Duration / 1000);
             Wait_For_Login_text.Text = Convert.ToString(Clicker.Logon_Wait / 1000);
@@ -34,16 +32,27 @@ namespace test
             Time_Between_Events_text.Text = Convert.ToString(Clicker.Time_Between_Events / 1000);
             Number_Of_Characters_text.Text = Convert.ToString(Clicker.Number_Characters);
             Number_Of_Reposts_text.Text = Convert.ToString(Clicker.Number_Reposts);
+        }
 
+        private void Show_ETA()
+        {
             int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
 
             int Hours = ETA_Seconds / 3600;
             int Remaining_Seconds = (ETA_Seconds - (Hours * 3600));
             int Minutes = Remaining_Seconds / 60;
             float Secs = (float)ETA_Seconds - ((float)Hours * 3600.0f) - ((float)Minutes * 60.0f);
-            int Seconds = (int)(60.0f * Secs);
 
             ETA_Value_Text.Content = Convert.ToString(Hours) + ":" + Convert.ToString(Minutes) + ":" + Convert.ToString(Secs);
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            Clicker.Set_Settings();
+            Show_Settings();
+            Show_ETA();
+            
         }
 
         //Top clicker portion
@@ -64,7 +73,7 @@ namespace test
             Clicker.Slider_Pos = Convert.ToInt32(e.NewValue);
         }
         private void Set_Milling(object sender, RoutedEventArgs e)
-        {                        
+        {
             Clicker.Slider_Pos = 1200;
             Milling.IsEnabled = false;
             Speed.IsEnabled = false;
@@ -180,7 +189,7 @@ namespace test
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
         }
 
-        private void Set_All(object sender, RoutedEventArgs e)
+        private void Save_Settings(object sender, RoutedEventArgs e)
         {
             Clicker.Search_Duration = Convert.ToInt32(Search_Duration_text.Text) * 1000;
             Clicker.Clicker_Duration = Convert.ToInt32(Clicker_Duration_text.Text) * 1000;
@@ -189,20 +198,23 @@ namespace test
             Clicker.Time_Between_Events = Convert.ToInt32(Time_Between_Events_text.Text) * 1000;
             Clicker.Number_Characters = Convert.ToInt32(Number_Of_Characters_text.Text);
             Clicker.Number_Reposts = Convert.ToInt32(Number_Of_Reposts_text.Text);
-
-            int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
-
-            int Hours = ETA_Seconds / 3600;
-            int Remaining_Seconds = (ETA_Seconds - (Hours * 3600));
-            int Minutes = Remaining_Seconds / 60;
-            float Secs = (float)ETA_Seconds - ((float)Hours * 3600.0f) - ((float)Minutes * 60.0f);
-            int Seconds = (int)(60.0f * Secs);
-
-            ETA_Value_Text.Content = Convert.ToString(Hours) + ":" + Convert.ToString(Minutes) + ":" + Convert.ToString(Secs); 
-                
-            
-
+            Clicker.Save_Settings();
+            Show_ETA();
             //write it to text file to save settings
+        }
+
+        private void Load_Settings(object sender, RoutedEventArgs e)
+        {
+            Clicker.Set_Settings();
+            Show_Settings();
+            Show_ETA();
+        }
+
+        private void Load_Defaults(object sender, RoutedEventArgs e)
+        {
+            Clicker.Load_Default_Settings();
+            Show_Settings();
+            Show_ETA();
         }
 
         private void Set_Continuous_Loop(object sender, RoutedEventArgs e)
