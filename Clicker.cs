@@ -62,7 +62,6 @@ namespace ClickControl
                     break;
                 }
             }
-            clickerState = false;
         }
             
         public static async void RunClickerAsync()
@@ -72,6 +71,24 @@ namespace ClickControl
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
                 await Delay(DelayCalc());
+            }
+        }
+
+        public static async void RunClickerForDurationAsync(int duration)
+        {
+            int length = 0;
+            clickerState = true;
+            while (clickerState)
+            {
+                _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
+                int delay = DelayCalc();
+                await Delay(delay);
+                
+                length += delay;
+                if (length >= duration)
+                {
+                    clickerState = false;
+                }
             }
         }
 
@@ -110,7 +127,7 @@ namespace ClickControl
 
                 // run post scan
                 await PressButton("2");
-                await Delay(Clicker_Duration + DelayCalc());
+                await Delay(Search_Duration + DelayCalc());
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -119,8 +136,7 @@ namespace ClickControl
                 //hit pause, run clicker
 
                 // post                
-                RunClickerAsync();
-                clickerState = false;
+                RunClickerForDurationAsync(Clicker_Duration);
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -160,7 +176,7 @@ namespace ClickControl
 
             // run post scan
             await PressButton("2");
-            await Delay(Clicker_Duration + DelayCalc());
+            await Delay(Search_Duration+ DelayCalc());
             if (!posterState) // if stopped break
             {
                 return;
@@ -169,8 +185,7 @@ namespace ClickControl
             //hit pause, run clicker
 
             // post                
-            RunClickerAsync();
-            clickerState = false;
+            RunClickerForDurationAsync(Clicker_Duration);
             if (!posterState) // if stopped break
             {
                 return;
