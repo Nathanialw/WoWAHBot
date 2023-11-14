@@ -142,7 +142,7 @@ namespace test
             Clicker.RunAuctionPostAsync();
         }
 
-        private async Task Stopclick()
+        private async Task WaitForStop()
         {
             while (Clicker.running)
             {
@@ -155,7 +155,7 @@ namespace test
             Clicker.posterState = false;
             Clicker.clickerState = false;
 
-            await Stopclick();
+            await WaitForStop();
             
             if (!Clicker.running)
             {

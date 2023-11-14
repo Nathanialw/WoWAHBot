@@ -53,6 +53,7 @@ namespace ClickControl
                 else
                 {
                     interval = duration;
+                    duration -= duration;
                 }
                 
                 await Task.Delay(interval);
