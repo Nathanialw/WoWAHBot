@@ -136,7 +136,9 @@ namespace ClickControl
                 //hit pause, run clicker
 
                 // post                
-                RunClickerForDurationAsync(Clicker_Duration);
+                RunClickerAsync();
+                await Delay(Clicker_Duration + DelayCalc());
+                clickerState = false;
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -176,7 +178,7 @@ namespace ClickControl
 
             // run post scan
             await PressButton("2");
-            await Delay(Search_Duration+ DelayCalc());
+            await Delay(Search_Duration + DelayCalc());
             if (!posterState) // if stopped break
             {
                 return;
@@ -185,7 +187,9 @@ namespace ClickControl
             //hit pause, run clicker
 
             // post                
-            RunClickerForDurationAsync(Clicker_Duration);
+            RunClickerAsync();
+            await Delay(Clicker_Duration + DelayCalc());
+            clickerState = false;
             if (!posterState) // if stopped break
             {
                 return;
