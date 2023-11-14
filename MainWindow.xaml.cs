@@ -142,19 +142,33 @@ namespace test
             Clicker.RunAuctionPostAsync();
         }
 
-        private void Posting_Stop(object sender, RoutedEventArgs e)
+        private async Task Stopclick()
         {
-            if (clickerStop.IsEnabled && !clickerStart.IsEnabled)
+            while (Clicker.running)
             {
-                clickerStop.IsEnabled = false;
-                clickerStart.IsEnabled = true;
+                await Clicker.Delay(1);
             }
-            //async while loops is not yet complete wait
+        }
 
-            posterStop.IsEnabled = false;
-            posterStart.IsEnabled = true;
+        private async void Posting_Stop(object sender, RoutedEventArgs e)
+        {
             Clicker.posterState = false;
             Clicker.clickerState = false;
+
+            await Stopclick();
+            
+            if (!Clicker.running)
+            {
+                if (clickerStop.IsEnabled && !clickerStart.IsEnabled)
+                {
+                    clickerStop.IsEnabled = false;
+                    clickerStart.IsEnabled = true;
+                }
+                //async while loops is not yet complete wait
+
+                posterStop.IsEnabled = false;
+                posterStart.IsEnabled = true;
+            }
         }
 
         private void Search_Duration(object sender, RoutedEventArgs e)

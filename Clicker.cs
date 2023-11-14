@@ -36,12 +36,10 @@ namespace ClickControl
 
         public static bool running = false;
 
-        // [+] fixed bug where click duration was not being used
-        // [] start button now only reactivates when the bot loop is ended
+        // [+] start button now only reactivates when the bot loop is ended
         // [] add continuous search/post mode 
         // [] add visualization of state of the bot
         // [] add time that bot will complete at
-        //maybe we can put an async while loop that checks if the bot is done to control the start/stop buttons
 
         //methods
         public static async Task Delay(int duration) {
