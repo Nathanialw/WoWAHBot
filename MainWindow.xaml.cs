@@ -141,6 +141,7 @@ namespace test
             posterStop.IsEnabled = true;
             Clicker.RunAuctionPostAsync();
         }
+
         private void Posting_Stop(object sender, RoutedEventArgs e)
         {
             if (clickerStop.IsEnabled && !clickerStart.IsEnabled)
@@ -148,6 +149,7 @@ namespace test
                 clickerStop.IsEnabled = false;
                 clickerStart.IsEnabled = true;
             }
+            //async while loops is not yet complete wait
 
             posterStop.IsEnabled = false;
             posterStart.IsEnabled = true;

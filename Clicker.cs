@@ -8,6 +8,7 @@ using System.Threading;
 using AutoIt;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace ClickControl
 {
@@ -33,7 +34,10 @@ namespace ClickControl
         public static int Number_Characters;
         public static int Number_Reposts;
 
-        // [+] fixed failing to cancel bot bug
+        public static bool running = false;
+
+        // [+] fixed bug where click duration was not being used
+        // [] start button now only reactivates when the bot loop is ended
         // [] add continuous search/post mode 
         // [] add visualization of state of the bot
         // [] add time that bot will complete at
@@ -107,6 +111,7 @@ namespace ClickControl
 
                 // run post scan
                 await PressButton("2");
+                await Delay(Clicker_Duration + DelayCalc());
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -116,7 +121,6 @@ namespace ClickControl
 
                 // post                
                 RunClickerAsync();
-                await Delay(Clicker_Duration + DelayCalc());
                 clickerState = false;
                 if (!posterState) // if stopped break
                 {
@@ -157,6 +161,7 @@ namespace ClickControl
 
             // run post scan
             await PressButton("2");
+            await Delay(Clicker_Duration + DelayCalc());
             if (!posterState) // if stopped break
             {
                 return;
@@ -166,7 +171,6 @@ namespace ClickControl
 
             // post                
             RunClickerAsync();
-            await Delay(Clicker_Duration + DelayCalc());
             clickerState = false;
             if (!posterState) // if stopped break
             {
@@ -240,6 +244,7 @@ namespace ClickControl
             //needs to be able to pause or end
             while (posterState)
             {
+                running = true;
                 for (int currentChar = 1; currentChar <= Number_Characters; currentChar++)
                 {
                     //login enchants
@@ -298,6 +303,8 @@ namespace ClickControl
                     posterState = false;
                 }
             }
+            running = false;
+                       
         }
 
         public static void Save_Settings()
