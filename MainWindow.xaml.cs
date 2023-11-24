@@ -36,7 +36,12 @@ namespace test
 
         private void Show_ETA()
         {
-            int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
+            int ETA_Seconds = ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) +
+                (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Characters) +
+                (Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters) + 
+                ((((Clicker.Search_Duration / 1000) + (Clicker.Clicker_Duration / 1000) + 
+                (Clicker.Delay_Between_Posts / 1000)) * Clicker.Number_Reposts) * Clicker.Number_Characters) + 
+                ((Clicker.Logon_Wait * 2 / 1000) * Clicker.Number_Characters);
 
             int Hours = ETA_Seconds / 3600;
             int Remaining_Seconds = (ETA_Seconds - (Hours * 3600));
