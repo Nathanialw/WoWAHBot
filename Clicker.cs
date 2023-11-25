@@ -44,7 +44,30 @@ namespace ClickControl
         // [] add time that bot will complete at
 
         //methods
-        public static async Task Delay(int duration) {
+        public static async Task Delay(int duration)
+        {
+            int delayDuration = duration;
+            int interval = 1000;
+            while (0 < delayDuration)
+            {
+                if (delayDuration >= 1000)
+                {
+                    delayDuration -= interval;
+                }
+                else
+                {
+                    interval = delayDuration;
+                    delayDuration -= delayDuration;
+                }
+
+                await Task.Delay(interval);
+                if (!posterState) // if stopped break
+                {
+                    break;
+                }
+            }
+        }
+        public static async Task PostingBotDelay(int duration) {
             int delayDuration = duration;
             int interval = 1000;
             while (0 < delayDuration)
@@ -95,7 +118,7 @@ namespace ClickControl
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
                 int delay = DelayCalc(Slider_Pos);
-                await Delay(delay);
+                await PostingBotDelay(delay);
                 
                 length += delay;
                 if (length >= duration)
@@ -116,7 +139,7 @@ namespace ClickControl
         private static async Task PressButton(string key)
         {
             _ = AutoItX.ControlSend(windowTitle, "", "", key);
-            await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
+            await PostingBotDelay(Time_Between_Events + DelayCalc(Slider_Pos));
         }
 
         private static async Task PostAuctions()
@@ -140,7 +163,7 @@ namespace ClickControl
 
                 // run post scan
                 await PressButton("2");
-                await Delay(Search_Duration + DelayCalc(Slider_Pos));
+                await PostingBotDelay(Search_Duration + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -150,7 +173,7 @@ namespace ClickControl
 
                 // post                
                 RunClickerAsync();
-                await Delay(Clicker_Duration + DelayCalc(Slider_Pos));
+                await PostingBotDelay(Clicker_Duration + DelayCalc(Slider_Pos));
                 clickerState = false;
                 if (!posterState) // if stopped break
                 {
@@ -165,7 +188,7 @@ namespace ClickControl
                 }
 
                 // wait between posts
-                await Delay(Delay_Between_Posts);
+                await PostingBotDelay(Delay_Between_Posts);
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -191,7 +214,7 @@ namespace ClickControl
 
             // run post scan
             await PressButton("2");
-            await Delay(Search_Duration + DelayCalc(Slider_Pos));
+            await PostingBotDelay(Search_Duration + DelayCalc(Slider_Pos));
             if (!posterState) // if stopped break
             {
                 return;
@@ -201,7 +224,7 @@ namespace ClickControl
 
             // post                
             RunClickerAsync();
-            await Delay(Clicker_Duration + DelayCalc(Slider_Pos));
+            await PostingBotDelay(Clicker_Duration + DelayCalc(Slider_Pos));
             clickerState = false;
             if (!posterState) // if stopped break
             {
@@ -216,7 +239,7 @@ namespace ClickControl
             }
 
             // wait between posts
-            await Delay(Delay_Between_Posts);
+            await PostingBotDelay(Delay_Between_Posts);
             if (!posterState) // if stopped break
             {
                 return;
@@ -227,7 +250,7 @@ namespace ClickControl
         {
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
-            await Delay(Logon_Wait + DelayCalc(Slider_Pos));
+            await PostingBotDelay(Logon_Wait + DelayCalc(Slider_Pos));
         }
 
         private static async Task Logout()
@@ -237,7 +260,7 @@ namespace ClickControl
 
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-            await Delay(Logon_Wait + DelayCalc(Slider_Pos));
+            await PostingBotDelay(Logon_Wait + DelayCalc(Slider_Pos));
         }
 
         private static async Task GoToGlyphChar(int currentChar)
@@ -246,7 +269,7 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
+                await PostingBotDelay(Time_Between_Events + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -260,7 +283,7 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
-                await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
+                await PostingBotDelay(Time_Between_Events + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;
