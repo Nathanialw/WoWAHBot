@@ -45,17 +45,18 @@ namespace ClickControl
 
         //methods
         public static async Task Delay(int duration) {
+            int delayDuration = duration;
             int interval = 1000;
-            while (0 < duration)
+            while (0 < delayDuration)
             {
-                if (duration >= 1000)
+                if (delayDuration >= 1000)
                 {
-                    duration -= interval;
+                    delayDuration -= interval;
                 }
                 else
                 {
-                    interval = duration;
-                    duration -= duration;
+                    interval = delayDuration;
+                    delayDuration -= delayDuration;
                 }
                 
                 await Task.Delay(interval);
@@ -82,7 +83,7 @@ namespace ClickControl
             while (antiafk)
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{F11}");
-                await Delay(DelayCalc(400000));
+                await Delay(DelayCalc(250000));
             }
         }
 
