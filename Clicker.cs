@@ -20,11 +20,12 @@ namespace ClickControl
         public static int variance = 50;
         public static int iterations = 0;
         public static string windowTitle = "World of Warcraft";
-        public static string spamKey = "+{F12}";
+        public static string spamKey = "{F12}";
         public static int Slider_Pos;
         public static bool clickerState = false;
         public static bool posterState = false;
         public static bool continuousLoop = false;
+        public static bool antiafk = false;
 
         public static int Search_Duration;
         public static int Clicker_Duration;
@@ -36,7 +37,8 @@ namespace ClickControl
 
         public static bool running = false;
 
-        // [+] start button now only reactivates when the bot loop is ended
+        // v1.0.2
+        // [+] add anti-afk option
         // [] add continuous search/post mode 
         // [] add visualization of state of the bot
         // [] add time that bot will complete at
@@ -70,7 +72,17 @@ namespace ClickControl
             while (clickerState)
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
-                await Delay(DelayCalc());
+                await Delay(DelayCalc(Slider_Pos));
+            }
+        }
+
+        public static async void AntiAFKAsync()
+        {
+            antiafk = true;
+            while (antiafk)
+            {
+                _ = AutoItX.ControlSend(windowTitle, "", "", "{F11}");
+                await Delay(DelayCalc(400000));
             }
         }
 
@@ -81,7 +93,7 @@ namespace ClickControl
             while (clickerState)
             {
                 _ = AutoItX.ControlSend(windowTitle, "", "", spamKey);
-                int delay = DelayCalc();
+                int delay = DelayCalc(Slider_Pos);
                 await Delay(delay);
                 
                 length += delay;
@@ -92,10 +104,10 @@ namespace ClickControl
             }
         }
 
-        private static int DelayCalc()
+        private static int DelayCalc(int delay)
         {
-            int a = Slider_Pos - variance;
-            int b = Slider_Pos + variance;
+            int a = delay - variance;
+            int b = delay + variance;
             if (a < 1) { a = 1; };              //in case of zero or negative
             return r.Next(a, b);
         }
@@ -103,7 +115,7 @@ namespace ClickControl
         private static async Task PressButton(string key)
         {
             _ = AutoItX.ControlSend(windowTitle, "", "", key);
-            await Delay(Time_Between_Events + DelayCalc());
+            await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
         }
 
         private static async Task PostAuctions()
@@ -127,7 +139,7 @@ namespace ClickControl
 
                 // run post scan
                 await PressButton("2");
-                await Delay(Search_Duration + DelayCalc());
+                await Delay(Search_Duration + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -137,7 +149,7 @@ namespace ClickControl
 
                 // post                
                 RunClickerAsync();
-                await Delay(Clicker_Duration + DelayCalc());
+                await Delay(Clicker_Duration + DelayCalc(Slider_Pos));
                 clickerState = false;
                 if (!posterState) // if stopped break
                 {
@@ -159,7 +171,7 @@ namespace ClickControl
                 }
             }
         }
-
+            
         private static async Task PostAuctionsOnce()
         {
             // tar auctioneer
@@ -178,7 +190,7 @@ namespace ClickControl
 
             // run post scan
             await PressButton("2");
-            await Delay(Search_Duration + DelayCalc());
+            await Delay(Search_Duration + DelayCalc(Slider_Pos));
             if (!posterState) // if stopped break
             {
                 return;
@@ -188,7 +200,7 @@ namespace ClickControl
 
             // post                
             RunClickerAsync();
-            await Delay(Clicker_Duration + DelayCalc());
+            await Delay(Clicker_Duration + DelayCalc(Slider_Pos));
             clickerState = false;
             if (!posterState) // if stopped break
             {
@@ -214,7 +226,7 @@ namespace ClickControl
         {
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "{enter}");
-            await Delay(Logon_Wait + DelayCalc());
+            await Delay(Logon_Wait + DelayCalc(Slider_Pos));
         }
 
         private static async Task Logout()
@@ -224,7 +236,7 @@ namespace ClickControl
 
             // logout
             _ = AutoItX.ControlSend(windowTitle, "", "", "3");
-            await Delay(Logon_Wait + DelayCalc());
+            await Delay(Logon_Wait + DelayCalc(Slider_Pos));
         }
 
         private static async Task GoToGlyphChar(int currentChar)
@@ -233,7 +245,7 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{down}");
-                await Delay(Time_Between_Events + DelayCalc());
+                await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;
@@ -247,7 +259,7 @@ namespace ClickControl
             {
                 // return to top
                 _ = AutoItX.ControlSend(windowTitle, "", "", "{up}");
-                await Delay(Time_Between_Events + DelayCalc());
+                await Delay(Time_Between_Events + DelayCalc(Slider_Pos));
                 if (!posterState) // if stopped break
                 {
                     break;

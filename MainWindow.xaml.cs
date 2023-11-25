@@ -83,7 +83,7 @@ namespace test
             Clicker.Slider_Pos = 1200;
             Milling.IsEnabled = false;
             Speed.IsEnabled = false;
-            Speed.Value = 1200;
+            Speed.Value = 1200;            
 
             Crafting.IsEnabled = true;
             Auction.IsEnabled = true;
@@ -248,6 +248,16 @@ namespace test
         {
             Clicker.continuousLoop = false;
         }
-  
+
+        private void Set_AntiAFK(object sender, RoutedEventArgs e)
+        {
+            Clicker.RunClickerAsync();
+        }
+
+        private void Unset_AntiAFK(object sender, RoutedEventArgs e)
+        {
+            Clicker.antiafk = false;
+        }
+
     }
 }

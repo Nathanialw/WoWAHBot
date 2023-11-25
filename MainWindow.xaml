@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:test"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Clicker v1.0.1"
+    Title="v1.0.2"
     Width="399"
     Height="305"
     Background="Gray"    
@@ -75,7 +75,7 @@
                             AutoToolTipPlacement="BottomRight"
                             IsDirectionReversed="True"
                             IsEnabled="True"
-                            Maximum="3000"
+                            Maximum="10000"
                             Minimum="1"
                             ValueChanged="Delay_Slider"
                             Value="200" />
@@ -225,7 +225,7 @@
             <Button
                 x:Name="posterStart"
                 Width="75"
-                Margin="24,25,0,0"
+                Margin="24,27,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="Posting_Start"
@@ -315,11 +315,11 @@
                 IsChecked="false"
                 Width="15"
                 Height="15"
-                Margin="35,8,0,0"
+                Margin="30,8,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top" RenderTransformOrigin="1.4,0.869" Grid.Column="1" />
             <Label
-                Margin="55,8,-8,0"
+                Margin="50,8,-3,0"
                 Padding="0"
                 Content="Loop"
                 Height="17" VerticalAlignment="Top"
@@ -379,6 +379,22 @@
                 Content="Load Settings" 
                 FontSize="8"
                 RenderTransformOrigin="8.177,2.269" />
+            <CheckBox
+                x:Name="AntiAFK"                     
+                Checked="Set_AntiAFK"
+                Unchecked="Unset_AntiAFK"
+                IsChecked="false"
+                Width="15"
+                Height="15"
+                Margin="30,22,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top" RenderTransformOrigin="1.4,0.869" Grid.Column="1" />
+            <Label
+                Margin="50,22,-3,0"
+                Padding="0"
+                Content="Anti-AFK"
+                Height="17" VerticalAlignment="Top"
+                FontSize="10" Grid.Column="1" />
         </Grid>
     </Grid>
 </Window>
