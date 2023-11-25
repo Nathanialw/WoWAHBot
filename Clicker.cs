@@ -60,11 +60,7 @@ namespace ClickControl
                     delayDuration -= delayDuration;
                 }
 
-                await Task.Delay(interval);
-                if (!posterState) // if stopped break
-                {
-                    break;
-                }
+                await Task.Delay(interval);                
             }
         }
         public static async Task PostingBotDelay(int duration) {
