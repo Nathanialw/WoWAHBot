@@ -106,7 +106,7 @@
                             FontSize="12"
                             IsEnabled="True" />
                         <Button
-                            x:Name="Crafting"
+                            x:Name="Crafting"                            
                             Width="45"
                             Height="17"
                             Margin="249,73,0,0"
@@ -203,8 +203,8 @@
                             Grid.ColumnSpan="2"
                             Margin="146,19,39,80"
                             AutoToolTipPlacement="BottomRight"
-                            Maximum="1000"
-                            Minimum="0"
+                            Maximum="10000"
+                            Minimum="1"
                             RenderTransformOrigin="0.3,1.591"
                             ValueChanged="variance_ValueChanged"
                             Value="50" />

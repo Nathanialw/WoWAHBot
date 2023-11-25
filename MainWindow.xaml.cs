@@ -251,7 +251,7 @@ namespace test
 
         private void Set_AntiAFK(object sender, RoutedEventArgs e)
         {
-            Clicker.RunClickerAsync();
+            Clicker.AntiAFKAsync();
         }
 
         private void Unset_AntiAFK(object sender, RoutedEventArgs e)
